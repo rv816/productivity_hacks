@@ -4,7 +4,6 @@ outlook = win32com.client.Dispatch("Outlook.Application").GetNamespace("MAPI")
 inbox = outlook.GetDefaultFolder(6)  # "6" refers to the index of a folder - in this case,
 # the inbox.
 inbox = inbox.Items
-inbox = inbox.Items
 
 
 class Message:
@@ -47,37 +46,32 @@ class Message:
             setattr(self, varname_base + '_size', attachment.Size)
 
 
-class Appointment: cals = []
-
-
-obdict = {}
-for idx, x in enumerate(cal):
-    if idx < 10:
-        obdict['global_appointment_id'] = x.GlobalAppointmentId
-        obdict['subject'] = x.Subject
-        obdict['location'] = x.Location
-        obdict['duration'] = x.Duration
-        obdict['busy_status'] = x.BusyStatus
-        obdict['attendees_required'] = x.RequiredAttendees
-        obdict['attendees_optional'] = x.OptionalAttendees
-        obdict['recipients_names'] = [y.name for y in x.Recipients]
-        obdict['meeting_status'] = x.MeetingStatus
-        obdict['response_status'] = x.ResponseStatus
-        obdict['conversation_id'] = x.ConversationID
-        obdict['conversation_index'] = x.ConversationIndex
-        obdict['conversation_topic'] = x.ConversationTopic
-        obdict['start'] = x.Start
-        obdict['end'] = x.End
-        obdict['unread'] = x.UnRead
-        obdict['body'] = x.Body
-        obdict['attachment_count'] = x.Attachments.Count
-        obdict['all_day_event'] = x.AllDayEvent
-        obdict['creation_time'] = x.CreationTime
-        obdict['last_modification_time'] = x.LastModificationTime
-        obdict['categories'] = x.Categories
-        obdict['duration'] = x.Duration
-        obdict['is_recurring'] = x.IsRecurring
-
-        cals.append(obdict)
-    else:
-        break
+class Appointment:
+    def __init__(self, x):
+        """ 
+        :param x:"Appointment Item" 
+        """
+        self.global_appointment_id = x.GlobalAppointmentId
+        self.subject = x.Subject
+        self.location = x.Location
+        self.duration = x.Duration
+        self.busy_status = x.BusyStatus
+        self.attendees_required = x.RequiredAttendees
+        self.attendees_optional = x.OptionalAttendees
+        self.recipients_names = [y.name for y in x.Recipients]
+        self.meeting_status = x.MeetingStatus
+        self.response_status = x.ResponseStatus
+        self.conversation_id = x.ConversationID
+        self.conversation_index = x.ConversationIndex
+        self.conversation_topic = x.ConversationTopic
+        self.start = x.Start
+        self.end = x.End
+        self.unread = x.UnRead
+        self.body = x.Body
+        self.attachment_count = x.Attachments.Count
+        self.all_day_event = x.AllDayEvent
+        self.creation_time = x.CreationTime
+        self.last_modification_time = x.LastModificationTime
+        self.categories = x.Categories
+        self.duration = x.Duration
+        self.is_recurring = x.IsRecurring
