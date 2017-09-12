@@ -46,6 +46,7 @@ class Message:
             setattr(self, varname_base + '_size', attachment.Size)
 
 
+# test
 class Appointment:
     def __init__(self, x):
         """ 
