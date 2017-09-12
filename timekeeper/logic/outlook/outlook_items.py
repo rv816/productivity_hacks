@@ -1,11 +1,3 @@
-import win32com.client
-
-outlook = win32com.client.Dispatch("Outlook.Application").GetNamespace("MAPI")
-inbox = outlook.GetDefaultFolder(6)  # "6" refers to the index of a folder - in this case,
-# the inbox.
-inbox = inbox.Items
-
-
 class Message:
     def __init__(self, message):
         self.entry_id = message.EntryID
@@ -46,7 +38,6 @@ class Message:
             setattr(self, varname_base + '_size', attachment.Size)
 
 
-# test
 class Appointment:
     def __init__(self, x):
         """ 
